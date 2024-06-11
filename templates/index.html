@@ -14,6 +14,20 @@
     <script>
         $(document).ready(function() {
             $('#resultsTable').DataTable();
+
+            $('#addStakeModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); 
+                var modal = $(this);
+                modal.find('.modal-title').text('Add Stake');
+            });
+
+            $('#addStakeForm').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.post('/add-stake', formData, function(response) {
+                    window.location.reload();
+                });
+            });
         });
     </script>
 </head>
@@ -71,9 +85,40 @@
     </nav>
     <div class="container">
         <h1 class="mt-5">Inodez Stake Yield Calculator <small class="text-muted">Version {{ version }}</small></h1>
-        
+        <button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#addStakeModal">Add Stake</button>
+        <a href="/stake-log" class="btn btn-info mb-3">View Stake Log</a>
         <div class="mt-5">
             {{ table | safe }}
+        </div>
+    </div>
+
+    <!-- Add Stake Modal -->
+    <div class="modal fade" id="addStakeModal" tabindex="-1" role="dialog" aria-labelledby="addStakeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addStakeModalLabel">Add Stake</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addStakeForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="stake_amount">Stake Amount</label>
+                            <input type="number" class="form-control" id="stake_amount" name="stake_amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stake_date">Stake Date and Time</label>
+                            <input type="datetime-local" class="form-control" id="stake_date" name="stake_date" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Stake</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>
