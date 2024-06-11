@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Inodez Stake Yield Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#resultsTable').DataTable();
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Settings</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="form-inline" method="post">
+                <div class="form-group mr-3">
+                    <label for="initial_nodes" class="mr-2">Initial Nodes</label>
+                    <input type="number" class="form-control" id="initial_nodes" name="initial_nodes" value="{{ initial_nodes }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="neoxa_spot_price" class="mr-2">Neoxa Spot Price</label>
+                    <input type="number" step="0.00000001" class="form-control" id="neoxa_spot_price" name="neoxa_spot_price" value="{{ neoxa_spot_price }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="usd_to_kd" class="mr-2">USD to KD Conversion Rate</label>
+                    <input type="number" step="0.0001" class="form-control" id="usd_to_kd" name="usd_to_kd" value="{{ usd_to_kd }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="neoxa_decimals" class="mr-2">Neoxa Decimals</label>
+                    <input type="number" class="form-control" id="neoxa_decimals" name="neoxa_decimals" value="{{ neoxa_decimals }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="usd_decimals" class="mr-2">USD Decimals</label>
+                    <input type="number" class="form-control" id="usd_decimals" name="usd_decimals" value="{{ usd_decimals }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="kd_decimals" class="mr-2">KD Decimals</label>
+                    <input type="number" class="form-control" id="kd_decimals" name="kd_decimals" value="{{ kd_decimals }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="daily_yield_rate" class="mr-2">Daily Yield Rate</label>
+                    <input type="number" step="0.0001" class="form-control" id="daily_yield_rate" name="daily_yield_rate" value="{{ daily_yield_rate }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="node_yield_per_48h" class="mr-2">Node Yield per 48 Hours</label>
+                    <input type="number" step="0.0001" class="form-control" id="node_yield_per_48h" name="node_yield_per_48h" value="{{ node_yield_per_48h }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="start_date" class="mr-2">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}" required>
+                </div>
+                <div class="form-group mr-3">
+                    <label for="initial_stake_amount" class="mr-2">Initial Stake Amount</label>
+                    <input type="number" class="form-control" id="initial_stake_amount" name="initial_stake_amount" value="{{ initial_stake_amount }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-5">Inodez Stake Yield Calculator <small class="text-muted">Version {{ version }}</small></h1>
+        
+        <div class="mt-5">
+            {{ table | safe }}
+        </div>
+    </div>
+</body>
+</html>
